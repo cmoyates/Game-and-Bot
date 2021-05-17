@@ -1,6 +1,6 @@
-# Dungeon Generation Demo
+# Game and Bot
 
-This is a small game made with Unity that demonstrates several of the techniques I learned in the final semester of my Computer Science degree.
+This is a small game made with Unity that demonstrates several of the techniques I learned in the final semester of my Computer Science degree (and a bot that plays it).
 
 This includes:
 - Procedural Content Generation
