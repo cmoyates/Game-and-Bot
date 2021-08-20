@@ -1,4 +1,4 @@
-name: Build
+name: Build and Deploy
 on:
   push:
     branches: [ main ]
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build:
+  Build_and_Deploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -16,9 +16,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: Library
-          key: Library-CI-CD-Unity-Test-WebGL
+          key: Library-Game-and-Bot-WebGL
           restore-keys: |
-            Library-CI-CD-Unity-Test-
+            Library-Game-and-Bot-
             Library-
       - name: Build
         uses: game-ci/unity-builder@v2
