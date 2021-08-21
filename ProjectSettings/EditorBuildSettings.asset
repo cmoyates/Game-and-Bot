@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: a128cf0dba1db5e4c8daec4442bf0fb7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dungeon.unity
     guid: fa6ff4e960e87544fa1684efd18450f6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DungeonWithAI.unity
     guid: 6ef400c3d209000469a8be1c0ba63308
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameOver.unity
     guid: 811f6009e5ad4e541b3b41043819d1a8
   m_configObjects: {}
