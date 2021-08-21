@@ -26,6 +26,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
+          unityVersion: 2021.1.17f1
       - uses: actions/upload-artifact@v2
         with:
           name: Build
