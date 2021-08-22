@@ -1,0 +1,38 @@
+name: Build and Deploy
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  Build_and_Deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Caching
+        uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-Game-and-Bot-WebGL
+          restore-keys: |
+            Library-Game-and-Bot-
+            Library-
+      - name: Build
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: WebGL
+          unityVersion: 2021.1.17f1
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build/WebGL/WebGL # The folder the action should deploy.
