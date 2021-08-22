@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 07e6868e613dd38c540a796e94f2f2ce291db0f5
 name: Build and Deploy
 on:
   push:
@@ -31,8 +35,11 @@ jobs:
         with:
           name: Build
           path: build
+<<<<<<< HEAD
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: build/WebGL/WebGL # The folder the action should deploy.
+=======
+>>>>>>> 07e6868e613dd38c540a796e94f2f2ce291db0f5
