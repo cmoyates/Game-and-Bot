@@ -1,32 +1,35 @@
 name: Build and Deploy
-on:
-  push:
-    branches: [ main ]
 
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  Build_and_Deploy:
+  build:
+    name: Build my project
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout
+      # Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Caching
-        uses: actions/cache@v2
+        with:
+          lfs: true
+
+      # Cache
+      - uses: actions/cache@v2
         with:
           path: Library
-          key: Library-Game-and-Bot-WebGL
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
-            Library-Game-and-Bot-
             Library-
-      - name: Build
+
+      # Build
+      - name: Build project
         uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
-          unityVersion: 2021.2.19f1
+
+      # Output
       - uses: actions/upload-artifact@v2
         with:
           name: Build
