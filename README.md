@@ -12,6 +12,13 @@ See it in action here: https://cmoyates.github.io/Game-and-Bot-Build/
 
 For a video showcase of the game click here: *Insert Link Here*
 
+## Todos
+- [ ] Add controller support
+- [ ] Come up with a better name
+- [ ] Come up with an art style
+- [ ] Redesign the game besed on the finalized art style
+- [ ] Add online leaderboard with [dreamlo](http://dreamlo.com/)
+
 ## Credits
 Aside from the things mentioned below, everything was done by me.
 
