@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
     int spawnCount = 0;
     public int aliveCount;
     public GameObject enemy;
-    public Text roundText;
+    public TextMeshProUGUI roundText;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
         dg = GameObject.FindGameObjectWithTag("Level Generator").GetComponent<DungeonGenerator>();
         spawnCount = dg.level;
         // Get a reference to the "Round" text
-        roundText = GameObject.Find("Round").GetComponent<Text>();
+        roundText = GameObject.Find("Level Text").GetComponent<TextMeshProUGUI>();
         // Spawn the enemies
         Spawn();
     }

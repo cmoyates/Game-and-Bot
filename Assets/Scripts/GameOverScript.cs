@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
 
 public class GameOverScript : MonoBehaviour
 {
-    public Text levelText;
+    public TextMeshProUGUI levelText;
 
     // Start is called before the first frame update
     void Start()
