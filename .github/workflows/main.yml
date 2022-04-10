@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: Build my project
+    name: Build and Deploy project
     runs-on: ubuntu-latest
     steps:
       # Checkout
@@ -30,7 +30,15 @@ jobs:
           targetPlatform: WebGL
 
       # Output
-      - uses: actions/upload-artifact@v2
+      - name: Upload
+        uses: actions/upload-artifact@v2
         with:
           name: Build
           path: build
+      
+      # Deploy
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: build
+          folder: build/WebGL/WebGL
