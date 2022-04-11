@@ -18,6 +18,7 @@ For a video showcase of the game click here: *Insert Link Here*
 - [ ] Come up with an art style
 - [ ] Redesign the game besed on the finalized art style
 - [ ] Add online leaderboard with [dreamlo](http://dreamlo.com/)
+- [ ] Add a settings menu
 
 ## Credits
 Aside from the things mentioned below, everything was done by me.
