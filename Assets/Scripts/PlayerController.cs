@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float dashCooldownScale = 1.0f;
     ScreenShake ss;
     Vector2 movement;
+    PauseMenu pauseMenu;
 
     private void Start()
     {
@@ -34,19 +36,13 @@ public class PlayerController : MonoBehaviour
         {
             healthBarSRs[i] = healthBar[i].GetComponent<SpriteRenderer>();
         }
+        // Get a reference to the pause menu script so pausing works
+        pauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Get the inputs from the player
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        // If the player presses shift and the dash is not on cooldown, start dashing
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCooldown <= 0.0f && !isDashing) 
-        {
-            StartCoroutine("Dash");
-        }
         // Update the dashes cooldown timer and the players color
         if (dashCooldown >= 0) 
         {
@@ -56,7 +52,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator Dash() 
+    public void Move(InputAction.CallbackContext context) 
+    {
+        // Get the movement direction as a Vector2
+        movement = context.ReadValue<Vector2>();
+    }
+
+    public void TriggerDash(InputAction.CallbackContext context) 
+    {
+        // If the player presses shift and the dash is not on cooldown, start dashing
+        if (context.performed && dashCooldown <= 0.0f && !isDashing) 
+        {
+            StartCoroutine("Dash");
+        }
+    }
+
+    public IEnumerator Dash() 
     {
         // Shake the screen
         StartCoroutine(ss.Shake(0.1f, 0.1f));
@@ -73,6 +84,16 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         dashMultiplier = 1;
         invincible = false;
+    }
+
+    public void Pause(InputAction.CallbackContext context) 
+    {
+        // If the pause button is pressed
+        if (context.performed) 
+        {
+            // Call the pause function on the pause menu script
+            pauseMenu.Pause();
+        }
     }
 
     public void TakeDamage() 

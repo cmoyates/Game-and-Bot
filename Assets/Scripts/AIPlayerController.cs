@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem;
 
 public class AIPlayerController : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class AIPlayerController : MonoBehaviour
     public Shooting shootingScript;
     bool goalIsTarget = false;
     ScreenShake ss;
+    PauseMenu pauseMenu;
 
     private void Start()
     {
@@ -74,6 +76,8 @@ public class AIPlayerController : MonoBehaviour
                 }
             }
         }
+        // Get a reference to the pause menu script so pausing works
+        pauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
     }
 
     // Update is called once per frame
@@ -157,7 +161,10 @@ public class AIPlayerController : MonoBehaviour
         {
             // Reset the shooting cooldown and shoot at the enemy
             currentShootingCooldown = 0;
-            shootingScript.Shoot(visibleEnemyTransforms[0].position);
+            // Get the direction from the player to the enemy
+            Vector2 dir = (visibleEnemyTransforms[0].position - transform.position).normalized;
+            // Shoot in that direction
+            shootingScript.Shoot(dir);
         }
         else 
         {
@@ -203,5 +210,15 @@ public class AIPlayerController : MonoBehaviour
         movement.Normalize();
         // Move the player according to the movement vector, the players speed, and whether or not the player was dashing
         rb.MovePosition(rb.position + movement * (moveSpeed * dashMultiplier) * Time.fixedDeltaTime);
+    }
+
+    public void Pause(InputAction.CallbackContext context)
+    {
+        // If the pause button is pressed
+        if (context.performed)
+        {
+            // Call the pause function on the pause menu script
+            pauseMenu.Pause();
+        }
     }
 }

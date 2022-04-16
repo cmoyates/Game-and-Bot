@@ -18,6 +18,12 @@ public class MainMenuController : MonoBehaviour
     public TextMeshProUGUI musicVolumeText;
     public Slider sfxSlider;
     public TextMeshProUGUI sfxVolumeText;
+    public Button instructionsBackButton;
+    public Button instructionsButton;
+    public Button creditsBackButton;
+    public Button creditsButton;
+    public Button settingsBackButton;
+    public Button settingsButton;
 
     private void Start()
     {
@@ -48,36 +54,42 @@ public class MainMenuController : MonoBehaviour
     {
         instructions.SetActive(true);
         ToggleMainUI(false);
+        instructionsBackButton.Select();
     }
     // Hides the instructions pannel
     public void HideInstructions() 
     {
         instructions.SetActive(false);
         ToggleMainUI(true);
+        instructionsButton.Select();
     }
     // Shows the credits pannel
     public void ShowCredits() 
     {
         credits.SetActive(true);
         ToggleMainUI(false);
+        creditsBackButton.Select();
     }
     // Hides the credits pannel
     public void HideCredits() 
     {
         credits.SetActive(false);
         ToggleMainUI(true);
+        creditsButton.Select();
     }
     // Shows the settings panel
     public void ShowSettings() 
     {
         settings.SetActive(true);
         ToggleMainUI(false);
+        settingsBackButton.Select();
     }
     // Hides the settings panel
     public void HideSettings() 
     {
         settings.SetActive(false);
         ToggleMainUI(true);
+        settingsButton.Select();
     }
 
     // Toggles the main UI when panels are shown

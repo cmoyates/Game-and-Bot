@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     GameObject musicPlayer;
     AudioSource musicSrc;
+    public Button resumeButton;
     
     // Start is called before the first frame update
     void Start()
@@ -18,29 +20,25 @@ public class PauseMenu : MonoBehaviour
         musicSrc = musicPlayer.GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Pause() 
     {
-        // When the player presses escape after level generation
-        if (Input.GetKeyDown(KeyCode.Escape) && GameObject.FindGameObjectsWithTag("Player").Length > 0) 
+        // Either pause or unpause appropriately
+        if (!isPaused)
         {
-            // Either pause or unpause appropriately
-            if (!isPaused)
-            {
-                // Stop time, show pause menu, pause music
-                Time.timeScale = 0;
-                pauseMenu.SetActive(true);
-                musicSrc.Pause();
-            }
-            else 
-            {
-                // Restart time, hide pause menu, play music
-                Time.timeScale = 1;
-                pauseMenu.SetActive(false);
-                musicSrc.Play();
-            }
-            isPaused = !isPaused;
+            // Stop time, show pause menu, pause music
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+            musicSrc.Pause();
+            resumeButton.Select();
         }
+        else
+        {
+            // Restart time, hide pause menu, play music
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+            musicSrc.Play();
+        }
+        isPaused = !isPaused;
     }
 
     // Triggered by a button, resume gameplay
